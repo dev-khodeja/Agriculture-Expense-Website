@@ -15,7 +15,7 @@ export default function Register() {
     setError('');
     setLoading(true);
     try {
-      const { data } = await axios.post('https://agriculture-expense-website.onrender.com/api/auth/register', form);
+      const { data } = await axios.post('/api/auth/register', form);
       login(data.token, data.user);
       navigate('/dashboard');
     } catch (err) {
