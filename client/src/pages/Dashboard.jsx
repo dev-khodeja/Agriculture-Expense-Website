@@ -113,9 +113,9 @@ function HomeTab({ summary }) {
       <div className="dash-grid">
         <div className="dash-box">
           <h3>আজকের কাজ</h3>
-          {summary.todayTasks.length === 0
+          {(summary.todayTasks || []).length === 0
             ? <p style={{ color: '#5a7a5a', fontSize: 14 }}>আজ কোনো কাজ নেই 🎉</p>
-            : summary.todayTasks.map(t => (
+            : (summary.todayTasks || []).map(t => (
               <div key={t._id} className="task-item">
                 <div className="task-dot" style={{ background: typeColor[t.type] || '#888' }}></div>
                 <div className="task-info">

@@ -30,7 +30,7 @@ router.get('/summary', auth, async (req, res) => {
 
     const totalExpense = expenses[0]?.total || 0;
 
-    res.json({ totalFarms, activeCrops, todayTaskCount: todayTasks.length, todayTasks, totalExpense });
+    res.json({ totalFarms: totalFarms || 0, activeCrops: activeCrops || 0, todayTaskCount: todayTasks?.length || 0, todayTasks: todayTasks || [], totalExpense: totalExpense || 0 });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
