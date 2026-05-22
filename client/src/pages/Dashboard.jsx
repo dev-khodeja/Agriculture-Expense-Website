@@ -106,7 +106,7 @@ function HomeTab({ summary }) {
         </div>
         <div className="dash-card">
           <div className="dash-card-label">মোট খরচ</div>
-          <div className="dash-card-val blue" style={{ fontSize: 20 }}>৳ {summary.totalExpense.toLocaleString('bn-BD')}</div>
+          <div className="dash-card-val blue" style={{ fontSize: 20 }}>৳ {(summary.totalExpense || 0).toLocaleString('bn-BD')}</div>
         </div>
       </div>
 

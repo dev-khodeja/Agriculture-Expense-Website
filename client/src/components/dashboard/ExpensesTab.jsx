@@ -32,11 +32,11 @@ export default function ExpensesTab() {
     fetchAll();
   };
 
-  const total = expenses.reduce((s, e) => s + e.amount, 0);
+  const total = expenses.reduce((s, e) => s + (Number(e.amount) || 0), 0);
 
   // Summary by category
   const summary = expenses.reduce((acc, e) => {
-    acc[e.category] = (acc[e.category] || 0) + e.amount;
+    acc[e.category] = (acc[e.category] || 0) + (Number(e.amount) || 0);
     return acc;
   }, {});
 
@@ -51,12 +51,12 @@ export default function ExpensesTab() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12, marginBottom: 20 }}>
         <div className="dash-card">
           <div className="dash-card-label">মোট খরচ</div>
-          <div className="dash-card-val blue" style={{ fontSize: 22 }}>৳ {total.toLocaleString('bn-BD')}</div>
+          <div className="dash-card-val blue" style={{ fontSize: 22 }}>৳ {(Number(total) || 0).toLocaleString('bn-BD')}</div>
         </div>
         {Object.entries(summary).map(([cat, amt]) => (
           <div key={cat} className="dash-card">
             <div className="dash-card-label">{cat}</div>
-            <div className="dash-card-val" style={{ fontSize: 18 }}>৳ {amt.toLocaleString('bn-BD')}</div>
+            <div className="dash-card-val" style={{ fontSize: 18 }}>৳ {(Number(amt) || 0).toLocaleString('bn-BD')}</div>
           </div>
         ))}
       </div>
@@ -73,7 +73,7 @@ export default function ExpensesTab() {
                     <tr key={e._id}>
                       <td>{new Date(e.date).toLocaleDateString('bn-BD')}</td>
                       <td><span className={`task-badge ${catColor[e.category]}`}>{e.category}</span></td>
-                      <td><strong>৳ {e.amount.toLocaleString('bn-BD')}</strong></td>
+                      <td><strong>৳ {(Number(e.amount) || 0).toLocaleString('bn-BD')}</strong></td>
                       <td>{e.farm?.name || '—'}</td>
                       <td style={{ color: '#5a7a5a', fontSize: 13 }}>{e.note || '—'}</td>
                       <td><button className="btn btn-danger" style={{ padding: '3px 8px', fontSize: 12 }} onClick={() => handleDelete(e._id)}>মুছুন</button></td>
